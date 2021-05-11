@@ -2,8 +2,8 @@
 ## Updated: 3-5-21
 ### Contact: Jason Rothenberg (jrothenb@uwyo.edu)
 
-*Scripts posted to GITHUB
-__bold__ Important (Core) scripts.
+*Scripts posted to GITHUB  
+__bold__ Important (Core) scripts.  
 
 ## Overview  :
 
@@ -14,7 +14,7 @@ This script controls the refractor telescope guiding camera. It is intended to a
 __*refractor_main.py__:  
 	Main code that controls thr refractor telescope camera and refractor cover. To run the refractor camera GUi run with python3 in a terminal window.  
 
-*refractor.ui:  
+refractor.ui:  
 	GUI design made with PyQt5 designer.  
 
 __*refractorGUI.py__:  
