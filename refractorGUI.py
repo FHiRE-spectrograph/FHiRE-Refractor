@@ -1,0 +1,93 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'refractor.ui'
+#
+# Created by: PyQt5 UI code generator 5.5.1
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(500, 220)
+        MainWindow.setMinimumSize(QtCore.QSize(500, 220))
+        MainWindow.setMaximumSize(QtCore.QSize(500, 220))
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.gridLayout_2 = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout_2.setObjectName("gridLayout_2")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.ds9Button = QtWidgets.QPushButton(self.centralwidget)
+        self.ds9Button.setObjectName("ds9Button")
+        self.verticalLayout_2.addWidget(self.ds9Button)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.numberExp = QtWidgets.QSpinBox(self.centralwidget)
+        self.numberExp.setObjectName("numberExp")
+        self.horizontalLayout.addWidget(self.numberExp)
+        self.timeExp = QtWidgets.QSpinBox(self.centralwidget)
+        self.timeExp.setObjectName("timeExp")
+        self.horizontalLayout.addWidget(self.timeExp)
+        self.exposeButton = QtWidgets.QPushButton(self.centralwidget)
+        self.exposeButton.setObjectName("exposeButton")
+        self.horizontalLayout.addWidget(self.exposeButton)
+        self.verticalLayout_2.addLayout(self.horizontalLayout)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.lineEdit_2 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_2.setMinimumSize(QtCore.QSize(50, 27))
+        self.lineEdit_2.setMaximumSize(QtCore.QSize(50, 27))
+        self.lineEdit_2.setAutoFillBackground(False)
+        self.lineEdit_2.setStyleSheet("border: 0px;color: #808080; background-color: #F0F0F0;")
+        self.lineEdit_2.setReadOnly(True)
+        self.lineEdit_2.setObjectName("lineEdit_2")
+        self.horizontalLayout_3.addWidget(self.lineEdit_2)
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setMinimumSize(QtCore.QSize(90, 27))
+        self.lineEdit.setMaximumSize(QtCore.QSize(59, 27))
+        self.lineEdit.setStyleSheet("border: 0px;color: #808080; background-color: #F0F0F0;")
+        self.lineEdit.setReadOnly(True)
+        self.lineEdit.setObjectName("lineEdit")
+        self.horizontalLayout_3.addWidget(self.lineEdit)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem)
+        self.verticalLayout_2.addLayout(self.horizontalLayout_3)
+        self.centroidButton = QtWidgets.QPushButton(self.centralwidget)
+        self.centroidButton.setObjectName("centroidButton")
+        self.verticalLayout_2.addWidget(self.centroidButton)
+        self.gridLayout_2.addLayout(self.verticalLayout_2, 2, 0, 1, 1)
+        self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
+        self.textEdit.setReadOnly(True)
+        self.textEdit.setObjectName("textEdit")
+        self.gridLayout_2.addWidget(self.textEdit, 0, 2, 3, 1)
+        self.refractorBox = QtWidgets.QGroupBox(self.centralwidget)
+        self.refractorBox.setObjectName("refractorBox")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.refractorBox)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.openButton = QtWidgets.QRadioButton(self.refractorBox)
+        self.openButton.setObjectName("openButton")
+        self.horizontalLayout_2.addWidget(self.openButton)
+        self.closeButton = QtWidgets.QRadioButton(self.refractorBox)
+        self.closeButton.setObjectName("closeButton")
+        self.horizontalLayout_2.addWidget(self.closeButton)
+        self.gridLayout_2.addWidget(self.refractorBox, 0, 0, 2, 1)
+        MainWindow.setCentralWidget(self.centralwidget)
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "Guiding Refractor Telescope"))
+        self.ds9Button.setText(_translate("MainWindow", "Open DS9"))
+        self.exposeButton.setText(_translate("MainWindow", "Expose"))
+        self.lineEdit_2.setText(_translate("MainWindow", "# Exps"))
+        self.lineEdit.setText(_translate("MainWindow", " Exp time (s)"))
+        self.centroidButton.setText(_translate("MainWindow", "Centroid and offset"))
+        self.refractorBox.setTitle(_translate("MainWindow", "Refractor Cover:"))
+        self.openButton.setText(_translate("MainWindow", "Open"))
+        self.closeButton.setText(_translate("MainWindow", "Close"))
+
