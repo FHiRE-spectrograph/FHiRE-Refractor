@@ -1,5 +1,5 @@
 # Refractor Telescope Guiding Camera
-## Updated: 3-5-21
+## Updated: 5-12-21
 ### Contact: Jason Rothenberg (jrothenb@uwyo.edu)
 
 *Scripts posted to GITHUB  
@@ -9,12 +9,14 @@ __bold__ Important (Core) scripts.
 
 This script controls the refractor telescope guiding camera. It is intended to automate the initial pointing of the WIRO telescope. First 'Open' the refractor cover. After moving to a source, take an exposure with the guide camera. Open that exposure in DS9 and place a region around the target star in the image. To select a region in DS9 set Region>Shape>Box, then click Edit>Region, and finally drag a box around a target star. Once a star is selected, press the 'Centroid and offset' button to calculate the distance from the centroid of the star to the FHiRE optical fiber (or center of another instrument) and automatically move the telescope. The script closes the refractor cover when the GUI is closed. To run the GUI type 'python3 refractor_main.py' in the terminal.  
 
+Note: RPi must be connected to internet for XPA to correctly launch DS9  
+
 ## List of files:
 
 __*refractor_main.py__:  
 	Main code that controls thr refractor telescope camera and refractor cover. To run the refractor camera GUi run with python3 in a terminal window.  
 
-refractor.ui:  
+*refractor.ui:  
 	GUI design made with PyQt5 designer.  
 
 __*refractorGUI.py__:  
