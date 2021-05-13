@@ -29,10 +29,15 @@ class Refractor():
 		self.camera.awb_gains = g
 		self.camera.capture(fname+".jpg", format='jpeg', bayer=True)
 
+		print("Exposure Complete")
+
 		self.convert2fits(fname)
 
 	# converts to a raw image (dng), then converts raw to fits
 	def convert2fits(self,img):
+	
+		print("Converting to fits")
+		
 		img_jpg = img + '.jpg'
 		rawConvert = RPICAM2DNG()
 		rawConvert.convert(img_jpg)
@@ -42,6 +47,8 @@ class Refractor():
 		# color-index can take one of four values, either 0, 1, 2, 3 which represent Red, Green, Blue and Unscaled Raw respectively
 		fitsConvert = cr2fits(img_raw, 1)
 		fitsConvert.convert()
+		
+		print("Conversion Complete")
 
 if __name__ == '__main__': 
 	refract = Refractor()
