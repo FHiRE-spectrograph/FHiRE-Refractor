@@ -119,7 +119,7 @@ class MainUiClass(QtWidgets.QMainWindow, refractorGUI.Ui_MainWindow):
 	def __init__(self,parent=None):
 		super(MainUiClass,self).__init__(parent)
 		self.setupUi(self)
-
+		
 		# send terminal output to textBox
 		sys.stdout=EmittingStream(textWritten=self.normalOutputWritten)
 		#comment out to send errors to terminal instead of textBox
@@ -133,7 +133,7 @@ class MainUiClass(QtWidgets.QMainWindow, refractorGUI.Ui_MainWindow):
 		self.cover_home() 
 
 		#Set regions.reg filepath
-		self.regionpath = '/home/fhire/Desktop/Refractor/regions.reg'
+		self.regionpath = '/home/fhire/Desktop/FHiRE-Refractor/regions.reg'
 	
 		# start threads and connect GUI buttons
 		self.createThreads()
@@ -161,7 +161,7 @@ class MainUiClass(QtWidgets.QMainWindow, refractorGUI.Ui_MainWindow):
 		self.closeButton.setToolTip("Closes the refractor telescope cover.")
 
 		self.exposeButton.pressed.connect(lambda: self.q.put(self.refractor_exp))
-		self.exposeButton.setToolTip("Takes exposures and saves FITS images to ~/Desktop/Refractor.")
+		self.exposeButton.setToolTip("Takes exposures and saves FITS images to ~/Desktop/FHiRE-Refractor.")
 
 		self.ds9Button.clicked.connect(lambda: self.q.put(self.openDS9))
 		self.ds9Button.setToolTip("Opens a new ds9 window.")
@@ -226,37 +226,39 @@ class MainUiClass(QtWidgets.QMainWindow, refractorGUI.Ui_MainWindow):
 	# conversion to FITS file requires python3.7 so have to call the script from terminal
 	def refractor_exp(self):		
 		# delete any old images
-		old_images = self.find('RefractorImage*', '/home/fhire/Desktop/Refractor')
+		old_images = self.find('RefractorImage*', '/home/fhire/Desktop/FHiRE-Refractor')
 		if old_images:
 			os.system("rm RefractorImage_temp*")
 		else:
 			pass
 
 		# read the number and time exp spin boxes and take that many images
+		print("Please wait for exposure(s) and conversion\nNote: Conversion to fits takes longer than exposure and happens immediatly for each exposure")
 		for x in range(0,self.num_exp):
 			print("Taking %s of %s exposure(s)" %(x+1,self.num_exp))
 			subprocess.run(["python3.7", 'refractor_camera.py', str(self.time_exp)])
+			print("Exposure %s of %s complete and converted" %(x+1,self.num_exp))
 		
 		# if more than one exposure stack images
 		if self.num_exp > 1:
-			image_list = self.find('*.fits', '/home/fhire/Desktop/Refractor')
+			image_list = self.find('*.fits', '/home/fhire/Desktop/FHiRE-Refractor')
 			image_concat = [fits.getdata(image) for image in image_list]
 			final_image = np.sum(image_concat, axis=0)
 
-			outfile = 'RefractorImage_stacked.fits'
+			outfile = 'RefractorImage_temp-stacked.fits'
 			hdu = fits.PrimaryHDU(final_image)
 			hdu.writeto(outfile, overwrite=True)
-			self.imgpath = '/home/fhire/Desktop/Refractor/RefractorImage_stacked.fits'
-			self.img = 'RefractorImage_stacked.fits'
+			self.imgpath = '/home/fhire/Desktop/FHiRE-Refractor/RefractorImage_temp-stacked.fits'
+			self.img = 'RefractorImage_temp-stacked.fits'
 			print ("Exposure stack saved to "+self.imgpath)
-			#self.openDS9(True)
+			self.openDS9(True)
 
 		# otherwise don't stack
 		else:
-			self.imgpath = '/home/fhire/Desktop/Refractor/RefractorImage_temp-G.fits'
+			self.imgpath = '/home/fhire/Desktop/FHiRE-Refractor/RefractorImage_temp-G.fits'
 			self.img = 'RefractorImage_temp-G.fits'
 			print ("Exposure saved to "+self.imgpath)
-			#self.openDS9(True)
+			self.openDS9(True)
 
 	# opens DS9 and shows last exposure if it exists
 	def openDS9(self, image=False):
@@ -264,8 +266,9 @@ class MainUiClass(QtWidgets.QMainWindow, refractorGUI.Ui_MainWindow):
 		pyds9.DS9()
 		# if called after taking an exposure open that exposure
 		if image == True:
-			os.system('xpaset -p ds9 fits '+str(self.imgpath)+' -zscale')
+			os.system('xpaset -p ds9 fits '+str(self.imgpath)+' zscale')
 			os.system('xpaset -p ds9 zoom to fit')
+			os.system('xpaset -p ds9 zscale')
 		elif image == False:
 			print("DS9 open...")
 
